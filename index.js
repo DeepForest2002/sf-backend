@@ -67,7 +67,7 @@ app.get("/oauth/callback", async (req, res) => {
     );
 
     tokenStore = response.data;
-    res.redirect(`${process.env.FRONTEND_URL}?loggedIn=true`);
+    res.redirect(`$https://sf-frontend-seven.vercel.app?loggedIn=true`);
   } catch (err) {
     console.error(err.response?.data || err.message);
     res.status(500).json({ error: err.response?.data || err.message });
