@@ -5,7 +5,12 @@ const crypto = require("crypto");
 require("dotenv").config();
 
 const app = express();
-app.use(cors({ origin: "http://localhost:5173" }));
+app.use(
+  cors({
+    origin: "https://sf-frontend-seven.vercel.app/",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 let tokenStore = {};
@@ -62,7 +67,7 @@ app.get("/oauth/callback", async (req, res) => {
     );
 
     tokenStore = response.data;
-    res.redirect("http://localhost:5173?loggedIn=true");
+    res.redirect(`${process.env.FRONTEND_URL}?loggedIn=true`);
   } catch (err) {
     console.error(err.response?.data || err.message);
     res.status(500).json({ error: err.response?.data || err.message });
